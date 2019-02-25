@@ -72,6 +72,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/VisIncr'
 Plug 'vim-scripts/VisIncr'
+Plug 'tpope/vim-surround'
 call plug#end()
 
 syntax on
