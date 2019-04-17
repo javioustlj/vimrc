@@ -2,18 +2,13 @@
 " Vim General options
 "==============================================================================
 " make vim behave in a more useful way instead of more Vi-compatible
-" set leader key
-let mapleader =","
 set nocompatible
 set encoding=utf-8
 set termencoding=utf-8
 set fileencodings=utf-8,chinese,gbk,latin-1
-if has("win32")
-set fileencoding=chinese
-else
 set fileencoding=utf-8
-endif
-
+" Language to use for menu translation.
+" set langmenu=none
 " To enable file type detection
 filetype on
 " To enable loading the indent file for specific file type
@@ -22,35 +17,57 @@ filetype indent on
 filetype plugin on
 " Use twice the width of ASCII characters with East Asian Width Class Ambiguous
 set ambiwidth=double
-" allow backspacing over autoindent, line breaks, the start of insert
+" allow backspacing over auto indent, line breaks, the start of insert
 set backspace=indent,eol,start
 " highlight the screen column of the cursor
 set cursorcolumn
 " Highlight the screen line of the cursor
 set cursorline
 " Use the appropriate number of spaces to insert a <Tab> in Insert mode
-set expandtab
-" highlight all matches
-set hlsearch
-" case insensitive
-set ignorecase smartcase
-" the windows always have a status line
 set laststatus=2
 " print the line number in front of each line
 set number
 " Show the line and column number of the cursor position
 set ruler
-" Number of spaces to use for each step of (auto)indent
-set shiftwidth=8
-" NUmber of spaces that a <Tab> counts for while performing editing operations
-set softtabstop=8
-" Number of spaces that a <Tab> in the file counts for
-set tabstop=8
 " lines will not wrap and only part of long lines will be displayed
 set nowrap
+" Don't ring the bell for error messages (include hitting <Esc> in Normal mode).
+set noerrorbells
+" raise a dialog asking if you wish to save the current files
+set confirm
+" Copy indent from current line when starting a new line
+set autoindent
+" Enables automatic C program indenting.
+set cindent
+" Number of screen lines to use for the command-line.
+set cmdheight=2
+" When a bracket is inserted, briefly jump to the matching one.
+set noshowmatch
+
 
 set textwidth=120
-
+"==============================================================================
+" Search
+"==============================================================================
+" highlight all matches
+set hlsearch
+" case insensitive
+set ignorecase smartcase
+" Show where the pattern, as it was typed so far, matches.
+set noincsearch
+"==============================================================================
+" <Tab>
+"==============================================================================
+" In Insert mode: Use the appropriate number of spaces to insert a <Tab>.
+set expandtab
+" a <Tab> in front of a line inserts blanks according to shiftwidth.
+set smarttab
+" Number of spaces to use for each step of (auto)indent
+set shiftwidth=4
+" Number of spaces that a <Tab> counts for while performing editing operations
+set softtabstop=4
+" Number of spaces that a <Tab> in the file counts for
+set tabstop=4
 "==============================================================================
 " Spell checking
 "==============================================================================
@@ -58,11 +75,14 @@ set textwidth=120
 set spell
 set spelllang=en,cjk
 
+" set leader key
+let mapleader =","
+
 noremap <Leader>y "+y
 noremap <Leader>p "+p
-"===============================================================================
+"==============================================================================
 " Vim-plug
-"===============================================================================
+"==============================================================================
 call plug#begin('~/.vim/plugged')
 Plug 'vim-scripts/VST'
 Plug 'altercation/vim-colors-solarized'
@@ -71,10 +91,12 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/VisIncr'
-Plug 'vim-scripts/VisIncr'
 Plug 'tpope/vim-surround'
 call plug#end()
 
+"==============================================================================
+" color
+"==============================================================================
 syntax on
 syntax enable
 set background=dark
