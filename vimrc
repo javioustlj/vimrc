@@ -3,10 +3,11 @@
 "==============================================================================
 " make vim behave in a more useful way instead of more Vi-compatible
 set nocompatible
+
 set encoding=utf-8
-set termencoding=utf-8
-set fileencodings=utf-8,chinese,gbk,latin-1
 set fileencoding=utf-8
+set termencoding=utf-8
+set fileencodings=ucs-bom,utf-8,chinese,gbk,big5,latin-1
 " Language to use for menu translation.
 " set langmenu=none
 " To enable file type detection
@@ -45,7 +46,7 @@ set cmdheight=2
 set noshowmatch
 
 
-set textwidth=120
+" set textwidth=120
 "==============================================================================
 " Search
 "==============================================================================
@@ -75,6 +76,39 @@ set tabstop=4
 set spell
 set spelllang=en,cjk
 
+"==============================================================================
+" Shell
+"==============================================================================
+" set shell=powershell
+" set shellcmdflag=-c
+
+"==============================================================================
+" IPA
+"==============================================================================
+digraphs ch 643
+digraphs ja 658
+digraphs ee 720
+digraphs di 618
+digraphs pa 593
+digraphs aw 596
+digraphs up 650
+digraphs /\ 652
+digraphs x3 604
+
+"==============================================================================
+" Trail space and tab
+"==============================================================================
+highlight UnwanttedTab ctermbg=red guibg=darkred
+highlight TrailSpace guibg=red ctermbg=darkred
+match UnwanttedTab /\t/
+match TrailSpace /\s\+\%#\@<!$/
+autocmd ColorScheme * highlight UnwanttedTab ctermbg=red guibg=darkred
+autocmd ColorScheme * highlight TrailSpace guibg=red ctermbg=darkred
+colorscheme torte
+
+"==============================================================================
+" key mapping
+"==============================================================================
 " set leader key
 let mapleader =","
 
