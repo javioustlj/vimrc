@@ -17,7 +17,7 @@ filetype indent on
 " To enable loading the plugin files for specific file types
 filetype plugin on
 " Use twice the width of ASCII characters with East Asian Width Class Ambiguous
-set ambiwidth=double
+" set ambiwidth=double
 " allow backspacing over auto indent, line breaks, the start of insert
 set backspace=indent,eol,start
 " highlight the screen column of the cursor
@@ -45,6 +45,13 @@ set cmdheight=2
 " When a bracket is inserted, briefly jump to the matching one.
 set noshowmatch
 
+" Show tabs as CTRL-I is displayed, display $ after end of line
+set list
+" this is how the file displaye after 80 words or 120 words how about you what
+set listchars=tab:>-,trail:-
+
+" Show the line number relative to the line with the cursor in front of each line
+set relativenumber
 
 " set textwidth=120
 "==============================================================================
@@ -64,18 +71,23 @@ set expandtab
 " a <Tab> in front of a line inserts blanks according to shiftwidth.
 set smarttab
 " Number of spaces to use for each step of (auto)indent
-set shiftwidth=4
+set shiftwidth=2
 " Number of spaces that a <Tab> counts for while performing editing operations
-set softtabstop=4
+set softtabstop=2
 " Number of spaces that a <Tab> in the file counts for
-set tabstop=4
+set tabstop=2
 "==============================================================================
 " Spell checking
 "==============================================================================
 " When on spell checking will be done.
 set spell
 set spelllang=en,cjk
-
+" Number of lines to scroll with CTRL-U and CTRL-D commands.
+set scroll=0
+" When this option is set, the current window scrolls as other scrollbind windows scroll
+set scrollbind
+" Minimal number of screen lines to keep above and below the cursor.
+set scrolloff=5
 "==============================================================================
 " Shell
 "==============================================================================
@@ -98,13 +110,13 @@ digraphs x3 604
 "==============================================================================
 " Trail space and tab
 "==============================================================================
-highlight UnwanttedTab ctermbg=red guibg=darkred
-highlight TrailSpace guibg=red ctermbg=darkred
-match UnwanttedTab /\t/
-match TrailSpace /\s\+\%#\@<!$/
-autocmd ColorScheme * highlight UnwanttedTab ctermbg=red guibg=darkred
-autocmd ColorScheme * highlight TrailSpace guibg=red ctermbg=darkred
-colorscheme torte
+"highlight UnwanttedTab ctermbg=red guibg=darkred
+"highlight TrailSpace guibg=red ctermbg=darkred
+"match UnwanttedTab /\t/
+"match TrailSpace /\s\+\%#\@<!$/
+"autocmd ColorScheme * highlight UnwanttedTab ctermbg=red guibg=darkred
+"autocmd ColorScheme * highlight TrailSpace guibg=red ctermbg=darkred
+"colorscheme torte
 
 "==============================================================================
 " key mapping
@@ -114,6 +126,19 @@ let mapleader =","
 
 noremap <Leader>y "+y
 noremap <Leader>p "+p
+noremap <F5> :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+    exec "w"
+    if &filetype == 'c'
+        exec "!gcc % -o %<"
+        exec "!time /t ./%<"
+    elseif &filetype == 'cpp'
+        exec "!g++ % -w -g"
+        exec "!a"
+    elseif &filetype == 'python'
+        exec "!time python %"
+    endif
+endfunc
 "==============================================================================
 " Vim-plug
 "==============================================================================
