@@ -17,7 +17,7 @@ filetype indent on
 " To enable loading the plugin files for specific file types
 filetype plugin on
 " Use twice the width of ASCII characters with East Asian Width Class Ambiguous
-set ambiwidth=double
+" set ambiwidth=double
 " allow backspacing over auto indent, line breaks, the start of insert
 set backspace=indent,eol,start
 " highlight the screen column of the cursor
@@ -64,11 +64,11 @@ set expandtab
 " a <Tab> in front of a line inserts blanks according to shiftwidth.
 set smarttab
 " Number of spaces to use for each step of (auto)indent
-set shiftwidth=4
+set shiftwidth=2
 " Number of spaces that a <Tab> counts for while performing editing operations
-set softtabstop=4
+set softtabstop=2
 " Number of spaces that a <Tab> in the file counts for
-set tabstop=4
+set tabstop=2
 "==============================================================================
 " Spell checking
 "==============================================================================
@@ -114,6 +114,19 @@ let mapleader =","
 
 noremap <Leader>y "+y
 noremap <Leader>p "+p
+noremap <F5> :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+    exec "w"
+    if &filetype == 'c'
+        exec "!gcc % -o %<"
+        exec "!time /t ./%<"
+    elseif &filetype == 'cpp'
+        exec "!g++ % -w -g"
+        exec "!a"
+    elseif &filetype == 'python'
+        exec "!time python %"
+    endif
+endfunc
 "==============================================================================
 " Vim-plug
 "==============================================================================
