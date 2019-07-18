@@ -45,6 +45,13 @@ set cmdheight=2
 " When a bracket is inserted, briefly jump to the matching one.
 set noshowmatch
 
+" Show tabs as CTRL-I is displayed, display $ after end of line
+set list
+" this is how the file displaye after 80 words or 120 words how about you what
+set listchars=tab:>-,trail:-
+
+" Show the line number relative to the line with the cursor in front of each line
+set relativenumber
 
 " set textwidth=120
 "==============================================================================
@@ -75,7 +82,12 @@ set tabstop=2
 " When on spell checking will be done.
 set spell
 set spelllang=en,cjk
-
+" Number of lines to scroll with CTRL-U and CTRL-D commands.
+set scroll=0
+" When this option is set, the current window scrolls as other scrollbind windows scroll
+set scrollbind
+" Minimal number of screen lines to keep above and below the cursor.
+set scrolloff=5
 "==============================================================================
 " Shell
 "==============================================================================
@@ -115,6 +127,19 @@ let mapleader =","
 
 noremap <Leader>y "+y
 noremap <Leader>p "+p
+noremap <F5> :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+    exec "w"
+    if &filetype == 'c'
+        exec "!gcc % -o %<"
+        exec "!time /t ./%<"
+    elseif &filetype == 'cpp'
+        exec "!g++ % -w -g"
+        exec "!a"
+    elseif &filetype == 'python'
+        exec "!time python %"
+    endif
+endfunc
 "==============================================================================
 " Vim-plug
 "==============================================================================
